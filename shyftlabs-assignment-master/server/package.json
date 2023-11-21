@@ -1,0 +1,37 @@
+{
+  "name": "shyftlabs-server",
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=18.16.0",
+    "npm": ">=9.5.1"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:prod": "npm run knex:mg:latest && npm run knex:sd:run && node src/index.js",
+    "dev": "./node_modules/.bin/nodemon src/index.js",
+    "knex:mg:make": "npx knex migrate:make ",
+    "knex:mg:latest": "npx knex migrate:latest",
+    "knex:mg:rollback:all": "npx knex migrate:rollback --all",
+    "knex:sd:make": "npx knex seed:make ",
+    "knex:sd:run": "npx knex seed:run",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mohammad Farooqi",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "joi": "^17.10.2",
+    "knex": "^2.5.1",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.1.0",
+    "nodemon": "^3.0.1"
+  }
+}

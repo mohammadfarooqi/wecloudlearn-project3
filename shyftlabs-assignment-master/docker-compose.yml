@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  client:
+    image: mohammadfarooqi/shyftlabs-assignment-client:latest
+    build:
+      context: ./client
+      args:
+        REACT_APP_API_URL: "http://shyftlabs-demo.keenver.com"
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+
+  server:
+    image: mohammadfarooqi/shyftlabs-assignment-server:latest
+    # build:
+    #   context: ./server
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
+      DB_NAME: mydb
+      ENV: production
+      PORT: 3000
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
